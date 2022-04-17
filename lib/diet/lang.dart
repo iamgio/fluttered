@@ -1,3 +1,3 @@
 const lang = {
-  'hello_name': 'Hello, Giorgio',
+  'hello_name': 'Hello, ',
 };

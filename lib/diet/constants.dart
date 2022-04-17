@@ -15,4 +15,5 @@ class Const {
   static const double b2 = 14;
 
   static const double defaultPadding = 16;
+  static const double defaultContentSpacing = 24;
 }
