@@ -3,6 +3,7 @@ import 'package:fluttered/common/widgets/loading_switcher.dart';
 import 'package:fluttered/diet/constants.dart';
 import 'package:fluttered/diet/lang.dart';
 import 'package:fluttered/diet/viewmodel/user_viewmodel.dart';
+import 'package:fluttered/diet/widgets/diet_circular_indicator.dart';
 import 'package:provider/provider.dart';
 
 class DietHome extends StatelessWidget {
@@ -36,12 +37,7 @@ class DietHome extends StatelessWidget {
       body: LoadingSwitcher(
         condition: user.hasLoaded,
         ifTrue: _buildContent(user),
-        ifFalse: const Center(
-          child: CircularProgressIndicator(
-            color: Const.primary,
-            strokeWidth: 10,
-          ),
-        ),
+        ifFalse: const DietCircularIndicator(),
       ),
     );
   }

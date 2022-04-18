@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttered/diet/constants.dart';
-import 'package:fluttered/diet/view/diet_home.dart';
+import 'package:fluttered/diet/view/home.dart';
 import 'package:fluttered/diet/viewmodel/user_viewmodel.dart';
 import 'package:provider/provider.dart';
 

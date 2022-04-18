@@ -4,6 +4,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:fluttered/diet/model/diet_model.dart';
+import 'package:fluttered/diet/model/meal_model.dart';
 import 'package:fluttered/diet/model/user_model.dart';
 
 Future<UserModel> data_getUser() => Future.delayed(
@@ -11,7 +12,15 @@ Future<UserModel> data_getUser() => Future.delayed(
       () => UserModel(
         name: 'Giorgio',
         weeklyDiet: WeeklyDietModel(
-          dailyDiets: [],
+          dailyDiets: [
+            DailyDietModel(day: 0, meals: [
+              MealModel(name: 'Meal 1', foods: []),
+              MealModel(name: 'Meal 2', foods: []),
+            ]),
+            DailyDietModel(day: 1, meals: [
+              MealModel(name: 'Meal 1', foods: []),
+            ]),
+          ],
         ),
       ),
     );
