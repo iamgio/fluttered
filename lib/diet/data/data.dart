@@ -6,9 +6,12 @@
 import 'package:fluttered/diet/model/diet_model.dart';
 import 'package:fluttered/diet/model/user_model.dart';
 
-UserModel data_getUser() => UserModel(
-      name: 'Giorgio',
-      weeklyDiet: WeeklyDietModel(
-        dailyDiets: [],
+Future<UserModel> data_getUser() => Future.delayed(
+      const Duration(seconds: 1),
+      () => UserModel(
+        name: 'Giorgio',
+        weeklyDiet: WeeklyDietModel(
+          dailyDiets: [],
+        ),
       ),
     );

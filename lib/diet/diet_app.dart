@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttered/diet/constants.dart';
-import 'package:fluttered/diet/lang.dart';
+import 'package:fluttered/diet/view/diet_home.dart';
 import 'package:fluttered/diet/viewmodel/user_viewmodel.dart';
 import 'package:provider/provider.dart';
-import 'package:provider/src/provider.dart';
 
 import 'data/data.dart';
 
@@ -45,37 +44,6 @@ class DietApp extends StatelessWidget {
           ),
         ),
         home: const DietHome(),
-      ),
-    );
-  }
-}
-
-class DietHome extends StatelessWidget {
-  const DietHome({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    UserViewModel user = context.watch<UserViewModel>();
-    return Scaffold(
-      backgroundColor: Const.tertiary,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Text(
-          lang['hello_name']! + user.name,
-          style: Theme.of(context).textTheme.headline1,
-        ),
-        centerTitle: false,
-        elevation: 0,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Const.defaultPadding),
-          child: Column(
-            children: [
-
-            ],
-          ),
-        ),
       ),
     );
   }
