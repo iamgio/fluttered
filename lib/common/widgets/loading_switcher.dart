@@ -10,21 +10,12 @@ class LoadingSwitcher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        AnimatedSwitcher(
-          duration: duration,
-          switchInCurve: Curves.easeInOut,
-          child: condition ? ifTrue : null,
-          transitionBuilder: (child, animation) => FadeTransition(opacity: animation, child: child),
-        ),
-        AnimatedSwitcher(
-          duration: duration,
-          switchOutCurve: Curves.easeInSine,
-          child: condition ? null : ifFalse,
-          transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
-        ),
-      ],
+    return AnimatedSwitcher(
+      duration: duration,
+      switchOutCurve: Curves.easeInSine,
+      child: condition ? ifTrue : ifFalse,
+      transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
+      layoutBuilder: (current, previous) => Stack(children: [...previous, current!]),
     );
   }
 }

@@ -67,6 +67,22 @@ class _DietHomeState extends State<DietHome> {
     return AppBottomTabBar(items: _navigationItems!);
   }
 
+  _buildAppBar(UserViewModel user) {
+    final title = _selectedIndex == 0 ? lang['hello_name']! + user.name : _navigationItems![_selectedIndex].name;
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      title: user.hasLoaded
+          ? Text(
+              title,
+              style: Theme.of(context).textTheme.headline1,
+              key: ValueKey(_selectedIndex),
+            )
+          : null,
+      centerTitle: false,
+      elevation: 0,
+    );
+  }
+
   _buildContent(UserViewModel user) => PageView(
         controller: _pageController,
         onPageChanged: (index) {
@@ -83,17 +99,7 @@ class _DietHomeState extends State<DietHome> {
     UserViewModel user = context.watch<UserViewModel>();
     return Scaffold(
       backgroundColor: Const.tertiary,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: user.hasLoaded
-            ? Text(
-                lang['hello_name']! + user.name,
-                style: Theme.of(context).textTheme.headline1,
-              )
-            : null,
-        centerTitle: false,
-        elevation: 0,
-      ),
+      appBar: _buildAppBar(user),
       body: LoadingSwitcher(
         condition: user.hasLoaded,
         ifTrue: _buildContent(user),
