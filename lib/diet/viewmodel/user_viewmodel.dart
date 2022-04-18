@@ -12,7 +12,7 @@ class UserViewModel extends ChangeNotifier {
     userFuture.then((user) {
       _hasLoaded = true;
       _name = user.name;
-      _weeklyDiet = WeeklyDietViewModel(user.weeklyDiet);
+      _weeklyDiet = WeeklyDietViewModel(user.weeklyDiet, callback: () => notifyListeners());
       notifyListeners();
     });
   }

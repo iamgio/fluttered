@@ -1,11 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:fluttered/diet/model/diet_model.dart';
 import 'package:fluttered/diet/model/meal_model.dart';
 
 class DailyDietViewModel {
   int _day = -1;
   List<MealModel> _meals = [];
+  final VoidCallback? callback;
 
-  DailyDietViewModel(DailyDietModel dailyDiet) {
+  DailyDietViewModel(DailyDietModel dailyDiet, {this.callback}) {
     _day = dailyDiet.day;
     _meals = dailyDiet.meals;
   }
@@ -18,9 +20,10 @@ class DailyDietViewModel {
 
 class WeeklyDietViewModel {
   List<DailyDietViewModel> _dailyDiets = [];
+  final VoidCallback? callback;
 
-  WeeklyDietViewModel(WeeklyDietModel weeklyDiet) {
-    _dailyDiets = weeklyDiet.dailyDiets.map((diet) => DailyDietViewModel(diet)).toList();
+  WeeklyDietViewModel(WeeklyDietModel weeklyDiet, {this.callback}) {
+    _dailyDiets = weeklyDiet.dailyDiets.map((diet) => DailyDietViewModel(diet, callback: callback)).toList();
   }
 
   List<DailyDietViewModel> get dailyDiets => _dailyDiets;
