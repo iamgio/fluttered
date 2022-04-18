@@ -12,7 +12,7 @@ class Centered extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           child,
-          SizedBox(height: AppBar().preferredSize.height * 3),
+          SizedBox(height: AppBar().preferredSize.height),
         ],
       ),
     );

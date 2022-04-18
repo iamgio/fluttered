@@ -16,4 +16,6 @@ class Const {
 
   static const double defaultPadding = 16;
   static const double defaultContentSpacing = 24;
+
+  static const int pageSwitchDuration = 250;
 }

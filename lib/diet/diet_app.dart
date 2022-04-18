@@ -19,6 +19,8 @@ class DietApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          primarySwatch: Colors.deepPurple,
+          primaryColor: Const.primary,
           textTheme: const TextTheme(
             headline1: TextStyle(
               fontSize: Const.h1,
