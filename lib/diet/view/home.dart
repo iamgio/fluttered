@@ -64,7 +64,12 @@ class _DietHomeState extends State<DietHome> {
   }
 
   _buildNavigation() {
-    return AppBottomTabBar(items: _navigationItems!);
+    return AppBottomTabBar(
+      items: _navigationItems!,
+      selectedIndex: _selectedIndex,
+      onSelect: (index) => _selectedIndex = index,
+      pageController: _pageController,
+    );
   }
 
   _buildAppBar(UserViewModel user) {

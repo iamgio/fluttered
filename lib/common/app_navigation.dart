@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-NavigationItem? _selectedItem;
-
 class NavigationItem {
   final String name;
   final Widget androidIcon;
@@ -22,8 +20,10 @@ class NavigationItem {
 // For Android
 class AppDrawer extends StatelessWidget {
   final List<NavigationItem> items;
+  final int selectedIndex;
+  final Function(int) onSelect;
   final Color? selectedColor;
-  const AppDrawer({Key? key, required this.items, this.selectedColor}) : super(key: key);
+  const AppDrawer({Key? key, required this.items, required this.selectedIndex, required this.onSelect, this.selectedColor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +34,11 @@ class AppDrawer extends StatelessWidget {
             (item) => ListTile(
               title: Text(item.name, style: Theme.of(context).textTheme.headline2),
               leading: item.androidIcon,
-              selected: item == _selectedItem,
+              selected: item == items[selectedIndex],
               selectedTileColor: selectedColor,
               onTap: () {
                 Navigator.pop(context);
-                _selectedItem = item;
+                onSelect(items.indexOf(item));
                 item.onTap(items.indexOf(item));
               },
             ),
@@ -52,24 +52,29 @@ class AppDrawer extends StatelessWidget {
 // For iOS
 class AppBottomTabBar extends StatefulWidget {
   final List<NavigationItem> items;
+  final int selectedIndex;
+  final Function(int) onSelect;
   final double iconSize;
-  const AppBottomTabBar({Key? key, required this.items, this.iconSize = 30.0}) : super(key: key);
+  final PageController? pageController;
+  const AppBottomTabBar({Key? key, required this.items, required this.selectedIndex, required this.onSelect, this.iconSize = 30.0, this.pageController}) : super(key: key);
 
   @override
   _AppBottomTabBarState createState() => _AppBottomTabBarState();
 }
 
 class _AppBottomTabBarState extends State<AppBottomTabBar> {
+
   @override
   Widget build(BuildContext context) {
     return CupertinoTabBar(
       iconSize: widget.iconSize,
       onTap: (index) {
         setState(() {
-          _selectedItem = widget.items[index]..onTap(index);
+          widget.items[index].onTap(index);
+          widget.onSelect(index);
         });
       },
-      currentIndex: _selectedItem == null ? 0 : widget.items.indexOf(_selectedItem!),
+      currentIndex: widget.selectedIndex,
       items: widget.items
           .map(
             (item) => BottomNavigationBarItem(
