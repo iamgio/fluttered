@@ -88,9 +88,9 @@ class _DietHomeState extends State<DietHome> {
         onPageChanged: (index) {
           setState(() => _selectedIndex = index);
         },
-        children: const [
-          DietPage(),
-          RecipesPage(),
+        children: [
+          DietPage(weeklyDiet: user.weeklyDiet),
+          const RecipesPage(),
         ],
       );
 
@@ -101,6 +101,7 @@ class _DietHomeState extends State<DietHome> {
       backgroundColor: Const.tertiary,
       appBar: _buildAppBar(user),
       body: LoadingSwitcher(
+        duration: const Duration(milliseconds: Const.pageSwitchDuration),
         condition: user.hasLoaded,
         ifTrue: _buildContent(user),
         ifFalse: const DietCircularIndicator(),

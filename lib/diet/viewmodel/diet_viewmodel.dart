@@ -1,20 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fluttered/diet/model/diet_model.dart';
-import 'package:fluttered/diet/model/meal_model.dart';
+import 'package:fluttered/diet/viewmodel/meal_viewmodel.dart';
 
 class DailyDietViewModel {
   int _day = -1;
-  List<MealModel> _meals = [];
+  List<MealViewModel> _meals = [];
   final VoidCallback? callback;
 
   DailyDietViewModel(DailyDietModel dailyDiet, {this.callback}) {
     _day = dailyDiet.day;
-    _meals = dailyDiet.meals;
+    _meals = dailyDiet.meals.map((meal) => MealViewModel(meal)).toList();
   }
 
   int get day => _day;
 
-  List<MealModel> get meals => _meals;
+  List<MealViewModel> get meals => _meals;
   // Support editing in the future
 }
 

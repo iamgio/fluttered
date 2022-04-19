@@ -12,14 +12,14 @@ enum QuantityType {
 }
 
 extension QuantityTypeExtension on QuantityType {
-  String asString() {
+  String asString(int? amount) {
     switch(this) {
       case QuantityType.undefined:
         return '';
       case QuantityType.grams:
         return 'g';
       case QuantityType.pieces:
-        return ' piece(s)';
+        return ' piece' + (amount == null ? '(s)' : amount == 1 ? '' : 's');
     }
   }
 }

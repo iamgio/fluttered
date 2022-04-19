@@ -12,7 +12,7 @@ class LoadingSwitcher extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
       duration: duration,
-      switchOutCurve: Curves.easeInSine,
+      switchOutCurve: Curves.easeOut,
       child: condition ? ifTrue : ifFalse,
       transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
       layoutBuilder: (current, previous) => Stack(children: [...previous, current!]),

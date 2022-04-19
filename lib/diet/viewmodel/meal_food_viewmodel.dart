@@ -16,6 +16,6 @@ class MealFoodViewModel {
   String get name => _name;
   int get amount => _amount;
   QuantityType get quantityType => _quantityType;
-  String get stringAmount => _name + _quantityType.asString();
+  String get stringAmount => _amount.toString() + _quantityType.asString(_amount);
   String? get imageUrl => _imageUrl;
 }
