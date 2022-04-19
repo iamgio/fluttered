@@ -26,7 +26,13 @@ Future<UserModel> data_getUser() => Future.delayed(
                   quantityType: QuantityType.pieces,
                 ),
               ]),
-              MealModel(name: 'Meal 2', foods: []),
+              MealModel(name: 'Meal 2', foods: [
+                MealFoodModel(
+                  name: 'Food 3',
+                  amount: 3,
+                  quantityType: QuantityType.pieces,
+                ),
+              ]),
             ]),
             DailyDietModel(day: 1, meals: [
               MealModel(name: 'Meal 1', foods: []),

@@ -22,10 +22,12 @@ class Const {
   static const double mealImageSize = 48;
   static const double mealAdditionalLeftPadding = 8;
   static const double mealVerticalPadding = 12;
+  static const double mealEmptyPadding = 32;
   static const double mealSpacing = 50;
+  static const double mealAddFoodRadius = 14;
   static const double mealShadowBlur = 48;
   static const double mealShadowY = 16;
-  static const double mealShadowOpacity = .05;
+  static const double mealShadowOpacity = .08;
 
   static const int pageSwitchDuration = 250;
 }

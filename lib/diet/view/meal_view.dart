@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttered/diet/constants.dart';
+import 'package:fluttered/diet/lang.dart';
 import 'package:fluttered/diet/viewmodel/meal_food_viewmodel.dart';
 import 'package:fluttered/diet/viewmodel/meal_viewmodel.dart';
 
@@ -48,6 +49,34 @@ class MealView extends StatelessWidget {
         subtitle: Text(food.stringAmount, style: Theme.of(context).textTheme.bodyText2),
       );
 
+  _buildFoods(BuildContext context) => List.generate(meal.foods.length * 2 - 1, (index) {
+        if (index % 2 != 0) return const Divider(height: 0);
+        return _buildFoodView(context, meal.foods[index ~/ 2]);
+      });
+
+  _buildEmptyFoods(BuildContext context) => Padding(
+        padding: const EdgeInsets.all(Const.mealEmptyPadding),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(lang['empty_meal']!, style: Theme.of(context).textTheme.bodyText2),
+              const SizedBox(height: Const.defaultPadding),
+              CupertinoButton(
+                child: Text(
+                  lang['add_food']!,
+                  style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(Const.mealAddFoodRadius)),
+                color: Const.primary,
+                onPressed: () {}, // TODO action
+              )
+            ],
+          ),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -67,10 +96,7 @@ class MealView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildHeader(context),
-          ...List.generate(meal.foods.length * 2 - 1, (index) {
-            if (index % 2 != 0) return const Divider(height: 0);
-            return _buildFoodView(context, meal.foods[index ~/ 2]);
-          }),
+          if (meal.foods.isNotEmpty) ..._buildFoods(context) else _buildEmptyFoods(context),
         ],
       ),
     );
