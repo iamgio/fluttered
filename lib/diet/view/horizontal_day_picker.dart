@@ -15,15 +15,7 @@ class HorizontalDayPicker extends StatefulWidget {
 class _HorizontalDayPickerState extends State<HorizontalDayPicker> {
   final List<GlobalKey> _textsKeys = List.generate(7, (_) => GlobalKey());
   double _indicatorPosition = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(
-      const Duration(milliseconds: Const.pageSwitchDuration),
-      () => _moveIndicatorTo(widget.selectedDay),
-    );
-  }
+  int _lastSelectedDay = -1;
 
   _buildDay(int day) => GestureDetector(
         onTap: () {
@@ -56,6 +48,7 @@ class _HorizontalDayPickerState extends State<HorizontalDayPicker> {
       );
 
   _moveIndicatorTo(int day) {
+    _lastSelectedDay = day;
     RenderBox box = _textsKeys[day].currentContext?.findRenderObject() as RenderBox;
     Offset position = box.localToGlobal(const Offset(-Const.defaultPadding, 0));
     setState(() {
@@ -65,6 +58,13 @@ class _HorizontalDayPickerState extends State<HorizontalDayPicker> {
 
   @override
   Widget build(BuildContext context) {
+    if(_lastSelectedDay != widget.selectedDay) {
+      // If a page is switched via PageView gestures
+      Future.delayed(
+        const Duration(milliseconds: Const.pageSwitchDuration),
+            () => _moveIndicatorTo(widget.selectedDay),
+      );
+    }
     return Padding(
       padding: const EdgeInsets.all(Const.defaultPadding),
       child: Column(

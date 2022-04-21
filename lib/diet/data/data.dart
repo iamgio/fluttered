@@ -48,6 +48,37 @@ Future<UserModel> data_getUser() => Future.delayed(
             DailyDietModel(day: 1, meals: [
               MealModel(name: 'Meal 1', foods: []),
             ]),
+            DailyDietModel(day: 1, meals: [
+              MealModel(name: 'Meal 1', foods: []),
+            ]),
+            DailyDietModel(day: 0, meals: [
+              MealModel(name: 'Breakfast', foods: [
+                MealFoodModel(
+                  name: 'Orange Juice',
+                  amount: 80,
+                ),
+                MealFoodModel(
+                  name: 'Yogurt',
+                  amount: 150,
+                  quantityType: QuantityType.grams,
+                ),
+              ]),
+              MealModel(name: 'Lunch', foods: [
+                MealFoodModel(
+                  name: 'Chicken Breast',
+                  amount: 120,
+                  quantityType: QuantityType.grams,
+                ),
+                MealFoodModel(
+                  name: 'Lettuce',
+                  amount: 50,
+                ),
+              ]),
+              MealModel(name: 'test', foods: []),
+            ]),
+            DailyDietModel(day: 1, meals: [
+              MealModel(name: 'Meal 1', foods: []),
+            ]),
           ],
         ),
       ),
