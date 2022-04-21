@@ -21,12 +21,25 @@ class _DietPageState extends State<DietPage> {
     super.initState();
     _selectedDay = DateTime.now().weekday - 1;
     _pageController = PageController();
+    Future.microtask(() => _switchTo(_selectedDay, animate: false));
   }
 
   @override
   void dispose() {
     _pageController?.dispose();
     super.dispose();
+  }
+
+  _switchTo(int day, {bool animate = true}) {
+    if(!animate) {
+      _pageController?.jumpToPage(day);
+      return;
+    }
+    _pageController?.animateToPage(
+      day,
+      duration: const Duration(milliseconds: Const.pageSwitchDuration),
+      curve: Curves.easeInOut,
+    );
   }
 
   List<Widget> _buildDailyMeals(int day) {
@@ -47,11 +60,7 @@ class _DietPageState extends State<DietPage> {
       selectedDay: _selectedDay,
       onSelect: (day) {
         setState(() => _selectedDay = day);
-        _pageController?.animateToPage(
-          day,
-          duration: const Duration(milliseconds: Const.pageSwitchDuration),
-          curve: Curves.easeInOut,
-        );
+        _switchTo(day);
       });
 
   @override
