@@ -15,24 +15,35 @@ Future<UserModel> data_getUser() => Future.delayed(
         weeklyDiet: WeeklyDietModel(
           dailyDiets: [
             DailyDietModel(day: 0, meals: [
-              MealModel(name: 'Meal 1', foods: [
+              MealModel(name: 'Breakfast', foods: [
                 MealFoodModel(
-                  name: 'Food 1',
-                  amount: 50,
+                  name: 'Cereals',
+                  amount: 20,
                 ),
                 MealFoodModel(
-                  name: 'Food 2',
-                  amount: 3,
+                  name: 'Dark Chocolate',
+                  amount: 10,
+                  quantityType: QuantityType.grams,
+                ),
+                MealFoodModel(
+                  name: 'Milk',
+                  amount: 200,
+                  quantityType: QuantityType.grams,
+                ),
+              ]),
+              MealModel(name: 'Lunch', foods: [
+                MealFoodModel(
+                  name: 'Pasta',
+                  amount: 80,
+                  quantityType: QuantityType.grams,
+                ),
+                MealFoodModel(
+                  name: 'Apple',
+                  amount: 1,
                   quantityType: QuantityType.pieces,
                 ),
               ]),
-              MealModel(name: 'Meal 2', foods: [
-                MealFoodModel(
-                  name: 'Food 3',
-                  amount: 3,
-                  quantityType: QuantityType.pieces,
-                ),
-              ]),
+              MealModel(name: 'test', foods: []),
             ]),
             DailyDietModel(day: 1, meals: [
               MealModel(name: 'Meal 1', foods: []),

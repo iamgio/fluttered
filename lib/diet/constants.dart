@@ -27,7 +27,7 @@ class Const {
   static const double mealAddFoodRadius = 14;
   static const double mealShadowBlur = 48;
   static const double mealShadowY = 16;
-  static const double mealShadowOpacity = .08;
+  static const double mealShadowOpacity = .1;
 
   static const int pageSwitchDuration = 250;
 }

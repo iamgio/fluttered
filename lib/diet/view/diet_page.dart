@@ -39,7 +39,7 @@ class _DietPageState extends State<DietPage> {
     )).toList();
   }
 
-  _buildWeeklyMeals() => List.generate(7, (index) => Column(
+  _buildWeeklyMeals() => List.generate(7, (index) => ListView(
     children: _buildDailyMeals(index),
   ));
 
