@@ -60,10 +60,14 @@ class _HorizontalDayPickerState extends State<HorizontalDayPicker> {
   Widget build(BuildContext context) {
     if(_lastSelectedDay != widget.selectedDay) {
       // If a page is switched via PageView gestures
-      Future.delayed(
-        const Duration(milliseconds: Const.pageSwitchDuration),
-            () => _moveIndicatorTo(widget.selectedDay),
-      );
+      if(_lastSelectedDay == -1) { // Unset: wait for animations to finish
+        Future.delayed(
+          const Duration(milliseconds: Const.pageSwitchDuration),
+              () => _moveIndicatorTo(widget.selectedDay),
+        );
+      } else {
+        _moveIndicatorTo(widget.selectedDay);
+      }
     }
     return Padding(
       padding: const EdgeInsets.all(Const.defaultPadding),
