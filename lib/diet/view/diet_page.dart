@@ -13,12 +13,13 @@ class DietPage extends StatefulWidget {
 }
 
 class _DietPageState extends State<DietPage> {
-  int _selectedDay = 0; // TODO current day of week
+  int _selectedDay = 0;
   PageController? _pageController;
 
   @override
   void initState() {
     super.initState();
+    _selectedDay = DateTime.now().weekday - 1;
     _pageController = PageController();
   }
 
