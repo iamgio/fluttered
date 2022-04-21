@@ -29,5 +29,8 @@ class Const {
   static const double mealShadowY = 16;
   static const double mealShadowOpacity = .1;
 
+  static const double dayPickerIndicatorSize = 6;
+
   static const int pageSwitchDuration = 250;
+  static const int daySwitchDuration = 160;
 }

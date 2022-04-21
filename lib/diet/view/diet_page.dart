@@ -1,6 +1,6 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:fluttered/diet/constants.dart';
+import 'package:fluttered/diet/view/horizontal_day_picker.dart';
 import 'package:fluttered/diet/view/meal_view.dart';
 import 'package:fluttered/diet/viewmodel/diet_viewmodel.dart';
 
@@ -13,7 +13,7 @@ class DietPage extends StatefulWidget {
 }
 
 class _DietPageState extends State<DietPage> {
-  int _selectedIndex = 0; // TODO current day of week
+  int _selectedDay = 0; // TODO current day of week
   PageController? _pageController;
 
   @override
@@ -21,7 +21,6 @@ class _DietPageState extends State<DietPage> {
     super.initState();
     _pageController = PageController();
   }
-
 
   @override
   void dispose() {
@@ -31,26 +30,45 @@ class _DietPageState extends State<DietPage> {
 
   List<Widget> _buildDailyMeals(int day) {
     final daily = widget.weeklyDiet.dailyDiets;
-    if(day < 0 || day >= daily.length) return [];
+    if (day < 0 || day >= daily.length) return [];
     final meals = daily[day].meals;
-    return meals.map((meal) => Padding(
-      padding: const EdgeInsets.all(Const.defaultPadding),
-      child: MealView(meal: meal),
-    )).toList();
+    return meals
+        .map((meal) => Padding(
+              padding: const EdgeInsets.all(Const.defaultPadding),
+              child: MealView(meal: meal),
+            ))
+        .toList();
   }
 
-  _buildWeeklyMeals() => List.generate(7, (index) => ListView(
-    children: _buildDailyMeals(index),
-  ));
+  _buildWeeklyMeals() => List.generate(7, (index) => ListView(children: _buildDailyMeals(index)));
+
+  _buildDayPicker() => HorizontalDayPicker(
+      selectedDay: _selectedDay,
+      onSelect: (day) {
+        setState(() => _selectedDay = day);
+        _pageController?.animateToPage(
+          day,
+          duration: const Duration(milliseconds: Const.pageSwitchDuration),
+          curve: Curves.easeInOut,
+        );
+      });
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      controller: _pageController!,
-      onPageChanged: (index) {
-        setState(() => _selectedIndex = index);
-      },
-      children: _buildWeeklyMeals(),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _buildDayPicker(),
+        Expanded(
+          child: PageView(
+            controller: _pageController!,
+            onPageChanged: (day) {
+              setState(() => _selectedDay = day);
+            },
+            children: _buildWeeklyMeals(),
+          ),
+        ),
+      ],
     );
   }
 }
