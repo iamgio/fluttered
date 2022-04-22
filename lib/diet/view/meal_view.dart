@@ -36,14 +36,14 @@ class MealView extends StatelessWidget {
   _buildFoodView(BuildContext context, MealFoodViewModel food) => ListTile(
         contentPadding: const EdgeInsets.symmetric(vertical: Const.mealVerticalPadding, horizontal: Const.defaultPadding + Const.mealAdditionalLeftPadding),
         minLeadingWidth: Const.mealSpacing,
-        leading: Container(
-          width: Const.mealImageSize,
-          height: Const.mealImageSize,
-          decoration: const BoxDecoration(
+        leading: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(Const.mealImageRadius)),
+          child: Container(
+            width: Const.mealImageSize,
+            height: Const.mealImageSize,
             color: Colors.grey,
-            borderRadius: BorderRadius.all(Radius.circular(Const.mealImageRadius)),
+            child: food.imageUrl != null ? Image.network(food.imageUrl!) : null,
           ),
-          child: food.imageUrl != null ? Image.network(food.imageUrl!) : null,
         ),
         title: Text(food.name, style: Theme.of(context).textTheme.headline3),
         subtitle: Text(food.stringAmount, style: Theme.of(context).textTheme.bodyText2),

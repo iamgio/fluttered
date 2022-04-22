@@ -4,5 +4,5 @@ class MealModel {
   final String name;
   final List<MealFoodModel> foods;
 
-  MealModel({required this.name, required this.foods});
+  const MealModel({required this.name, required this.foods});
 }

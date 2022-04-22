@@ -10,7 +10,7 @@ import 'package:fluttered/diet/model/user_model.dart';
 
 Future<UserModel> data_getUser() => Future.delayed(
       const Duration(seconds: 1),
-      () => UserModel(
+      () => const UserModel(
         name: 'Giorgio',
         weeklyDiet: WeeklyDietModel(
           dailyDiets: [
@@ -19,16 +19,19 @@ Future<UserModel> data_getUser() => Future.delayed(
                 MealFoodModel(
                   name: 'Cereals',
                   amount: 20,
+                  imageUrl: 'https://i.imgur.com/leeOxMI.png',
                 ),
                 MealFoodModel(
                   name: 'Dark Chocolate',
                   amount: 10,
                   quantityType: QuantityType.grams,
+                  imageUrl: 'https://i.imgur.com/rXfQdse.png',
                 ),
                 MealFoodModel(
                   name: 'Milk',
                   amount: 200,
                   quantityType: QuantityType.grams,
+                  imageUrl: 'https://i.imgur.com/xgLg5AK.png',
                 ),
               ]),
               MealModel(name: 'Lunch', foods: [
@@ -36,14 +39,15 @@ Future<UserModel> data_getUser() => Future.delayed(
                   name: 'Pasta',
                   amount: 80,
                   quantityType: QuantityType.grams,
+                  imageUrl: 'https://i.imgur.com/oVdto9M.png',
                 ),
                 MealFoodModel(
                   name: 'Apple',
                   amount: 1,
                   quantityType: QuantityType.pieces,
+                  imageUrl: 'https://i.imgur.com/J7KsDGD.png',
                 ),
               ]),
-              MealModel(name: 'test', foods: []),
             ]),
             DailyDietModel(day: 1, meals: [
               MealModel(name: 'Meal 1', foods: []),

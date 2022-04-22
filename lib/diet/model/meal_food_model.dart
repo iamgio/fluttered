@@ -4,7 +4,7 @@ class MealFoodModel {
   final QuantityType quantityType;
   final String? imageUrl;
 
-  MealFoodModel({required this.name, required this.amount, this.quantityType = QuantityType.grams, this.imageUrl});
+  const MealFoodModel({required this.name, required this.amount, this.quantityType = QuantityType.grams, this.imageUrl});
 }
 
 enum QuantityType {

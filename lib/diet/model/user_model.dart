@@ -4,5 +4,5 @@ class UserModel {
   final String name;
   final WeeklyDietModel weeklyDiet;
 
-  UserModel({required this.name, required this.weeklyDiet});
+  const UserModel({required this.name, required this.weeklyDiet});
 }
