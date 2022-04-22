@@ -59,7 +59,7 @@ class _DietPageState extends State<DietPage> {
   _buildDayPicker() => HorizontalDayPicker(
       selectedDay: _selectedDay,
       onSelect: (day) {
-        setState(() => _selectedDay = day);
+        _selectedDay = day;
         _switchTo(day);
       });
 

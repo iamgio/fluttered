@@ -35,8 +35,9 @@ class _HorizontalDayPickerState extends State<HorizontalDayPicker> {
       );
 
   _buildDayIndicator() => AnimatedPadding(
-        duration: const Duration(milliseconds: Const.daySwitchDuration),
         padding: EdgeInsets.only(left: _indicatorPosition, top: 3),
+        duration: const Duration(milliseconds: Const.daySwitchDuration),
+        curve: Curves.easeOutSine,
         child: Container(
           width: Const.dayPickerIndicatorSize,
           height: Const.dayPickerIndicatorSize,
@@ -58,12 +59,13 @@ class _HorizontalDayPickerState extends State<HorizontalDayPicker> {
 
   @override
   Widget build(BuildContext context) {
-    if(_lastSelectedDay != widget.selectedDay) {
+    if (_lastSelectedDay != widget.selectedDay) {
       // If a page is switched via PageView gestures
-      if(_lastSelectedDay == -1) { // Unset: wait for animations to finish
+      if (_lastSelectedDay == -1) {
+        // Unset: wait for animations to finish
         Future.delayed(
           const Duration(milliseconds: Const.pageSwitchDuration),
-              () => _moveIndicatorTo(widget.selectedDay),
+          () => _moveIndicatorTo(widget.selectedDay),
         );
       } else {
         _moveIndicatorTo(widget.selectedDay);
