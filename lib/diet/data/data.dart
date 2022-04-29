@@ -6,6 +6,7 @@
 import 'package:fluttered/diet/model/diet_model.dart';
 import 'package:fluttered/diet/model/meal_food_model.dart';
 import 'package:fluttered/diet/model/meal_model.dart';
+import 'package:fluttered/diet/model/recipe_model.dart';
 import 'package:fluttered/diet/model/user_model.dart';
 
 Future<UserModel> data_getUser() => Future.delayed(
@@ -87,3 +88,11 @@ Future<UserModel> data_getUser() => Future.delayed(
         ),
       ),
     );
+
+Future<RecipesModel> data_getRecipes() => Future.delayed(
+  const Duration(seconds: 1),
+    () => const RecipesModel([
+      RecipeModel(name: 'Recipe 1', categories: [], imageUrl: null, isFavorite: false),
+      RecipeModel(name: 'Recipe 2', categories: [], imageUrl: null, isFavorite: false),
+    ]),
+);

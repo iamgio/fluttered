@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttered/diet/constants.dart';
 import 'package:fluttered/diet/view/home.dart';
+import 'package:fluttered/diet/viewmodel/recipe_viewmodel.dart';
 import 'package:fluttered/diet/viewmodel/user_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +16,7 @@ class DietApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => UserViewModel(data_getUser())),
+        ChangeNotifierProvider(create: (_) => RecipesViewModel(data_getRecipes())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

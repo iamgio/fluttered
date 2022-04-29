@@ -6,7 +6,7 @@ import 'package:fluttered/diet/viewmodel/diet_viewmodel.dart';
 class UserViewModel extends ChangeNotifier {
   bool _hasLoaded = false;
   String _name = '';
-  WeeklyDietViewModel _weeklyDiet = WeeklyDietViewModel(WeeklyDietModel(dailyDiets: []));
+  WeeklyDietViewModel _weeklyDiet = WeeklyDietViewModel(const WeeklyDietModel(dailyDiets: []));
 
   UserViewModel(Future<UserModel> userFuture) {
     userFuture.then((user) {
