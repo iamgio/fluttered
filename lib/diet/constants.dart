@@ -13,6 +13,7 @@ class Const {
   static const double h4 = 14;
   static const double b1 = 16;
   static const double b2 = 14;
+  static const double lineHeight = 1.45;
 
   static const double defaultPadding = 16;
   static const double defaultContentSpacing = 24;
@@ -30,6 +31,13 @@ class Const {
   static const double mealShadowOpacity = .1;
 
   static const double dayPickerIndicatorSize = 6;
+
+  static const double recipeHeight = 150;
+  static const double recipeRadius = 32;
+  static const double recipeShadowBlur = 22;
+  static const double recipeShadowY = 12;
+  static const double recipeShadowOpacity = .1;
+  static const double recipesSpacing = 24;
 
   static const int pageSwitchDuration = 250;
   static const int daySwitchDuration = 160;

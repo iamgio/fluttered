@@ -92,7 +92,7 @@ Future<UserModel> data_getUser() => Future.delayed(
 Future<RecipesModel> data_getRecipes() => Future.delayed(
   const Duration(seconds: 1),
     () => const RecipesModel([
-      RecipeModel(name: 'Recipe 1', categories: [], imageUrl: null, isFavorite: false),
-      RecipeModel(name: 'Recipe 2', categories: [], imageUrl: null, isFavorite: false),
+      RecipeModel(name: 'Baked pumpkin and parmesan fondue', categories: [], imageUrl: 'https://i.imgur.com/kkJvtdg.jpg', isFavorite: false),
+      RecipeModel(name: 'Peanut butter', categories: [], imageUrl: 'https://i.imgur.com/x4KLaJy.png', isFavorite: false),
     ]),
 );

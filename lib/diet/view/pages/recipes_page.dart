@@ -12,7 +12,10 @@ class RecipesPage extends StatelessWidget {
 
   _buildContent(RecipesViewModel recipes) {
     return Column(
-      children: List.generate(recipes.length, (index) => RecipeView(recipe: recipes.recipes[index])),
+      children: List.generate(recipes.length * 2, (index) {
+        if (index % 2 == 0) return const SizedBox(height: Const.recipesSpacing);
+        return RecipeView(recipe: recipes.recipes[index ~/ 2]);
+      }),
     );
   }
 
