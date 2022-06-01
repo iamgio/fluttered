@@ -20,7 +20,7 @@ class RecipeViewModel {
   String? get imageUrl => _imageUrl;
   bool get isFavorite => _isFavorite;
 
-  set favorite(bool isFavorite) {
+  set isFavorite(bool isFavorite) {
     _isFavorite = isFavorite;
     callback?.call();
   }
