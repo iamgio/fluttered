@@ -34,10 +34,15 @@ class Const {
 
   static const double recipeHeight = 150;
   static const double recipeRadius = 32;
+  static const double recipeGradientOpacity = .55;
+  static const List<double> recipeGradientStops = [.3, .75];
   static const double recipeShadowBlur = 22;
   static const double recipeShadowY = 12;
   static const double recipeShadowOpacity = .1;
   static const double recipesSpacing = 24;
+
+  static const double recipeHeartAnimationScale = 1.45;
+  static const int    recipeHeartAnimationDuration = 160;
 
   static const int pageSwitchDuration = 250;
   static const int daySwitchDuration = 160;

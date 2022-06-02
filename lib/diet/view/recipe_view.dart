@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:fluttered/diet/constants.dart';
 import 'package:fluttered/diet/viewmodel/recipe_viewmodel.dart';
+import 'package:simple_animations/simple_animations.dart';
 
 class RecipeView extends StatefulWidget {
   final RecipeViewModel recipe;
@@ -12,13 +13,25 @@ class RecipeView extends StatefulWidget {
   State<RecipeView> createState() => _RecipeViewState();
 }
 
-class _RecipeViewState extends State<RecipeView> {
+class _RecipeViewState extends State<RecipeView> with AnimationMixin {
+  late Animation<double> _heartSize;
+
+  @override
+  void initState() {
+    _heartSize = Tween(begin: 1.0, end: Const.recipeHeartAnimationScale).animate(CurvedAnimation(
+      parent: controller,
+      curve: Curves.easeInOutSine,
+      reverseCurve: Curves.easeInQuart,
+    ));
+    super.initState();
+  }
+
   LinearGradient _buildGradient() => LinearGradient(
         colors: [
           Colors.transparent,
-          Colors.black.withOpacity(.55),
+          Colors.black.withOpacity(Const.recipeGradientOpacity),
         ],
-        stops: const [.3, .75],
+        stops: Const.recipeGradientStops,
         begin: Alignment.bottomCenter,
         end: Alignment.topCenter,
       );
@@ -63,8 +76,14 @@ class _RecipeViewState extends State<RecipeView> {
               bottom: Const.recipesSpacing,
               child: FloatingActionButton(
                 backgroundColor: Const.secondary,
-                child: Icon(recipe.isFavorite ? CupertinoIcons.heart_fill : CupertinoIcons.heart),
-                onPressed: () => recipe.isFavorite ^= true,
+                child: ScaleTransition(
+                  scale: _heartSize,
+                  child: Icon(recipe.isFavorite ? CupertinoIcons.heart_fill : CupertinoIcons.heart),
+                ),
+                onPressed: () {
+                  controller.play(duration: const Duration(milliseconds: Const.recipeHeartAnimationDuration)).then((_) => controller.reverse());
+                  recipe.isFavorite ^= true;
+                },
               ),
             ),
           ],
