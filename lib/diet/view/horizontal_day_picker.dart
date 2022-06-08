@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:fluttered/diet/constants.dart';
 import 'package:fluttered/diet/lang.dart';
@@ -35,7 +37,7 @@ class _HorizontalDayPickerState extends State<HorizontalDayPicker> {
       );
 
   _buildDayIndicator() => AnimatedPadding(
-        padding: EdgeInsets.only(left: _indicatorPosition, top: 3),
+        padding: EdgeInsets.only(left: max(0, _indicatorPosition), top: 3),
         duration: const Duration(milliseconds: Const.daySwitchDuration),
         curve: Curves.easeOutSine,
         child: Container(
