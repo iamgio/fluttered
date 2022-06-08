@@ -9,4 +9,5 @@ const lang = {
   'day.4': 'Fri',
   'day.5': 'Sat',
   'day.6': 'Sun',
+  'search_recipe': 'Search by name, ingredients...',
 };

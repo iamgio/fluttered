@@ -95,7 +95,7 @@ class _DietHomeState extends State<DietHome> {
         },
         children: [
           DietPage(weeklyDiet: user.weeklyDiet),
-          const RecipesPage(),
+          RecipesPage(),
         ],
       );
 
