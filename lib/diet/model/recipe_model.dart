@@ -1,26 +1,20 @@
 class RecipeModel {
   final String name;
-  final List<RecipeCategory> categories;
   final String? imageUrl;
   final bool isFavorite;
+  final List<String> tags;
 
   const RecipeModel({
     required this.name,
-    required this.categories,
     required this.imageUrl,
     required this.isFavorite,
+    required this.tags,
   });
 }
 
 class RecipesModel {
   final List<RecipeModel> recipes;
+  final List<String> tags;
 
-  const RecipesModel(this.recipes);
-}
-
-enum RecipeCategory {
-  breakfast,
-  lunch,
-  snack,
-  dinner,
+  const RecipesModel({required this.recipes, required this.tags});
 }

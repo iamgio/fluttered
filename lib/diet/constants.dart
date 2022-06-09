@@ -49,6 +49,9 @@ class Const {
   static const double recipesSearchFocusedBorderWidth = 2;
   static const double recipesSearchIconPaddingLeft = 12;
   static const double recipesSearchIconPaddingRight = 4;
+  static const double recipesFilterRadius = 32;
+  static const double recipesFilterPadding = 12;
+  static const double recipesFilterSpacing = 12;
 
   static const int pageSwitchDuration = 250;
   static const int daySwitchDuration = 160;

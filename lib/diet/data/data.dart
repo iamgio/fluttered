@@ -91,18 +91,21 @@ Future<UserModel> data_getUser() => Future.delayed(
 
 Future<RecipesModel> data_getRecipes() => Future.delayed(
       const Duration(seconds: 1),
-      () => const RecipesModel([
-        RecipeModel(
-          name: 'Baked pumpkin and parmesan fondue',
-          categories: [],
-          imageUrl: 'https://i.imgur.com/kkJvtdg.jpg',
-          isFavorite: false,
-        ),
-        RecipeModel(
-          name: 'Peanut butter',
-          categories: [],
-          imageUrl: 'https://i.imgur.com/x4KLaJy.png',
-          isFavorite: true,
-        ),
-      ]),
+      () => const RecipesModel(
+        recipes: [
+          RecipeModel(
+            name: 'Baked pumpkin and parmesan fondue',
+            imageUrl: 'https://i.imgur.com/kkJvtdg.jpg',
+            isFavorite: false,
+            tags: ['Lunch', 'Dinner'],
+          ),
+          RecipeModel(
+            name: 'Peanut butter',
+            imageUrl: 'https://i.imgur.com/x4KLaJy.png',
+            isFavorite: true,
+            tags: ['Snack', 'Side dish'],
+          ),
+        ],
+        tags: ['Lunch', 'Dinner', 'Snack', 'Side dish'],
+      ),
     );
