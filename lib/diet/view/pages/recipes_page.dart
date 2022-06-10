@@ -70,13 +70,14 @@ class RecipesPage extends StatelessWidget {
               ),
               ...List.generate(recipes.tags.length * 2, (index) {
                 if(index % 2 == 0) return const SizedBox(width: Const.recipesFilterSpacing);
+                int i = index ~/ 2;
                 return RecipesFilterButton(
-                  child: Text(recipes.tags[index ~/ 2]),
+                  child: Text(recipes.tags[i]),
                   onChanged: (changed) {
                     if (changed) {
-                      recipes.filter.tagsIndexes.add(index);
+                      recipes.filter.tagsIndexes.add(i);
                     } else {
-                      recipes.filter.tagsIndexes.remove(index);
+                      recipes.filter.tagsIndexes.remove(i);
                     }
                     _applyFilter(recipes);
                   },

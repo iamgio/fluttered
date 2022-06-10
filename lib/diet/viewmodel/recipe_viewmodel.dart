@@ -74,6 +74,7 @@ class RecipesFilter {
 
   bool tagsSatisfied(List<String> recipeTags, List<String> allRecipesTags) {
     return tagsIndexes.every((index) {
+      if(index >= allRecipesTags.length) return false;
       return recipeTags.contains(allRecipesTags[index]);
     });
   }
