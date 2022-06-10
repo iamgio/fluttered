@@ -52,6 +52,7 @@ class Const {
   static const double recipesFilterRadius = 32;
   static const double recipesFilterPadding = 12;
   static const double recipesFilterSpacing = 12;
+  static const int    recipesFilterPressAnimationDuration = 220;
 
   static const int pageSwitchDuration = 250;
   static const int daySwitchDuration = 160;
