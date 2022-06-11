@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttered/common/padded_page.dart';
+import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:fluttered/common/widgets/loading_switcher.dart';
 import 'package:fluttered/diet/constants.dart';
 import 'package:fluttered/diet/lang.dart';
@@ -16,18 +16,12 @@ class RecipesPage extends StatelessWidget {
   RecipesPage({Key? key}) : super(key: key);
 
   _buildContent(BuildContext context, RecipesViewModel recipes) {
-    return Column(
-      children: [
-        const SizedBox(height: 8),
-        _buildSearchField(),
-        _buildSearchFilters(context, recipes),
-        const SizedBox(height: 8),
-        ...List.generate(recipes.filteredRecipes.length * 2, (index) {
-          if (index % 2 != 0) return const SizedBox(height: Const.recipesSpacing);
-          return RecipeView(recipe: recipes.filteredRecipes[index ~/ 2]);
-        }),
-      ],
-    );
+    return List.generate(recipes.filteredRecipes.length, (index) {
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(Const.defaultPadding, 0, Const.defaultPadding, Const.recipesSpacing),
+        child: RecipeView(recipe: recipes.filteredRecipes[index]),
+      );
+    });
   }
 
   _buildInputBorder({double width = Const.recipesSearchDefaultBorderWidth}) => OutlineInputBorder(
@@ -52,41 +46,52 @@ class RecipesPage extends StatelessWidget {
         cursorColor: Const.primary,
       );
 
-  _buildSearchFilters(BuildContext context, RecipesViewModel recipes) => Padding(
-        padding: const EdgeInsets.symmetric(vertical: Const.recipesSpacing),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              RecipesFilterButton(
-                child: const Icon(CupertinoIcons.heart_fill, color: Const.secondary),
+  _buildSearchFilters(BuildContext context, RecipesViewModel recipes) => SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(width: Const.defaultPadding),
+            RecipesFilterButton(
+              child: const Icon(CupertinoIcons.heart_fill, color: Const.secondary),
+              onChanged: (changed) {
+                recipes.filter.onlyFavorites = changed;
+                _applyFilter(recipes);
+              },
+            ),
+            ...List.generate(recipes.tags.length * 2, (index) {
+              if (index % 2 == 0) return const SizedBox(width: Const.recipesFilterSpacing);
+              int i = index ~/ 2;
+              return RecipesFilterButton(
+                child: Text(recipes.tags[i]),
                 onChanged: (changed) {
-                  recipes.filter.onlyFavorites = changed;
+                  if (changed) {
+                    recipes.filter.tagsIndexes.add(i);
+                  } else {
+                    recipes.filter.tagsIndexes.remove(i);
+                  }
                   _applyFilter(recipes);
                 },
-              ),
-              ...List.generate(recipes.tags.length * 2, (index) {
-                if(index % 2 == 0) return const SizedBox(width: Const.recipesFilterSpacing);
-                int i = index ~/ 2;
-                return RecipesFilterButton(
-                  child: Text(recipes.tags[i]),
-                  onChanged: (changed) {
-                    if (changed) {
-                      recipes.filter.tagsIndexes.add(i);
-                    } else {
-                      recipes.filter.tagsIndexes.remove(i);
-                    }
-                    _applyFilter(recipes);
-                  },
-                );
-              }),
-            ],
-          ),
+              );
+            }),
+          ],
         ),
       );
+
+  _buildSearchFiltersBar(BuildContext context, RecipesViewModel recipes) {
+    return Container(
+      color: Const.tertiary,
+      child: Column(
+        children: [
+          const SizedBox(height: Const.recipesSpacing / 2),
+          _buildSearchFilters(context, recipes),
+          const SizedBox(height: Const.recipesSpacing),
+        ],
+      ),
+    );
+  }
 
   void _applyFilter(RecipesViewModel recipes) => recipes.applyFilter(_queryController.text);
 
@@ -96,7 +101,32 @@ class RecipesPage extends StatelessWidget {
     return LoadingSwitcher(
       duration: const Duration(milliseconds: Const.pageSwitchDuration),
       condition: recipes.hasLoaded,
-      ifTrue: PaddedPage(child: _buildContent(context, recipes)),
+      ifTrue: CustomScrollView(
+        slivers: [
+          // When scrolling, the search bar gets hidden
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(
+                Const.defaultPadding,
+                8,
+                Const.defaultPadding,
+                Const.recipesSpacing / 2,
+              ),
+              child: _buildSearchField(),
+            ),
+          ),
+          // The search filters stay on instead
+          SliverStickyHeader(
+            header: _buildSearchFiltersBar(context, recipes),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate([
+                const SizedBox(height: 8),
+                ..._buildContent(context, recipes), // Recipe widgets are built here
+              ]),
+            ),
+          ),
+        ],
+      ),
       ifFalse: const DietCircularIndicator(),
     );
   }

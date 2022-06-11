@@ -105,7 +105,19 @@ Future<RecipesModel> data_getRecipes() => Future.delayed(
             isFavorite: true,
             tags: ['Snack', 'Side dish'],
           ),
+          RecipeModel(
+            name: 'Test 1',
+            imageUrl: null,
+            isFavorite: false,
+            tags: ['Breakfast'],
+          ),
+          RecipeModel(
+            name: 'Test 2',
+            imageUrl: null,
+            isFavorite: false,
+            tags: ['Breakfast'],
+          ),
         ],
-        tags: ['Lunch', 'Dinner', 'Snack', 'Side dish'],
+        tags: ['Breakfast', 'Lunch', 'Dinner', 'Snack', 'Side dish'],
       ),
     );
