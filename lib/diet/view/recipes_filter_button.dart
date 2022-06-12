@@ -42,7 +42,6 @@ class _RecipesFilterButtonState extends State<RecipesFilterButton> with Animatio
             }
           });
         },
-        padding: const EdgeInsets.all(Const.recipesFilterPadding),
         elevation: 0,
         splashColor: Colors.transparent,
         shape: RoundedRectangleBorder(

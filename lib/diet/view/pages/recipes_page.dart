@@ -46,38 +46,63 @@ class RecipesPage extends StatelessWidget {
         cursorColor: Const.primary,
       );
 
-  _buildSearchFilters(BuildContext context, RecipesViewModel recipes) => SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(width: Const.defaultPadding),
-            RecipesFilterButton(
-              child: const Icon(CupertinoIcons.heart_fill, color: Const.secondary),
-              onChanged: (changed) {
-                recipes.filter.onlyFavorites = changed;
-                _applyFilter(recipes);
-              },
-            ),
-            ...List.generate(recipes.tags.length * 2, (index) {
-              if (index % 2 == 0) return const SizedBox(width: Const.recipesFilterSpacing);
-              int i = index ~/ 2;
-              return RecipesFilterButton(
-                child: Text(recipes.tags[i]),
-                onChanged: (changed) {
-                  if (changed) {
-                    recipes.filter.tagsIndexes.add(i);
-                  } else {
-                    recipes.filter.tagsIndexes.remove(i);
-                  }
-                  _applyFilter(recipes);
-                },
-              );
-            }),
-          ],
+  // A gradient masks for the scrollable filters row
+  _buildFiltersScrollGradient() => Positioned.fill(
+    child: IgnorePointer(
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Const.tertiary,
+              Const.tertiary.withOpacity(0),
+              Const.tertiary.withOpacity(0),
+              Const.tertiary,
+            ],
+            stops: const [0, Const.recipesFilterScrollGradientOffset, 1 - Const.recipesFilterScrollGradientOffset, 1],
+          ),
         ),
+      ),
+    ),
+  );
+
+  _buildSearchFilters(BuildContext context, RecipesViewModel recipes) => Stack(
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(width: Const.defaultPadding),
+                RecipesFilterButton(
+                  child: const Icon(CupertinoIcons.heart_fill, color: Const.secondary),
+                  onChanged: (changed) {
+                    recipes.filter.onlyFavorites = changed;
+                    _applyFilter(recipes);
+                  },
+                ),
+                ...List.generate(recipes.tags.length * 2, (index) {
+                  if (index % 2 == 0) return const SizedBox(width: Const.recipesFilterSpacing);
+                  int i = index ~/ 2;
+                  return RecipesFilterButton(
+                    child: Text(recipes.tags[i]),
+                    onChanged: (changed) {
+                      if (changed) {
+                        recipes.filter.tagsIndexes.add(i);
+                      } else {
+                        recipes.filter.tagsIndexes.remove(i);
+                      }
+                      _applyFilter(recipes);
+                    },
+                  );
+                }),
+                const SizedBox(width: Const.defaultPadding),
+              ],
+            ),
+          ),
+          _buildFiltersScrollGradient(),
+        ],
       );
 
   _buildSearchFiltersBar(BuildContext context, RecipesViewModel recipes) {

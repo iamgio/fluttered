@@ -50,8 +50,8 @@ class Const {
   static const double recipesSearchIconPaddingLeft = 12;
   static const double recipesSearchIconPaddingRight = 4;
   static const double recipesFilterRadius = 32;
-  static const double recipesFilterPadding = 12;
   static const double recipesFilterSpacing = 12;
+  static const double recipesFilterScrollGradientOffset = .06;
   static const int    recipesFilterPressAnimationDuration = 220;
 
   static const int pageSwitchDuration = 250;
