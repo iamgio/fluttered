@@ -69,7 +69,7 @@ class RecipesFilter {
   bool onlyFavorites = false;
 
   bool querySatisfied(String query, RecipeViewModel recipe) {
-    return query.isEmpty || recipe.name.contains(query); // TODO ingredients
+    return query.isEmpty || recipe.name.toLowerCase().contains(query.toLowerCase()); // TODO ingredients
   }
 
   bool tagsSatisfied(List<String> recipeTags, List<String> allRecipesTags) {

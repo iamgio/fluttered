@@ -123,6 +123,8 @@ class RecipesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     RecipesViewModel recipes = context.watch<RecipesViewModel>();
+    _queryController.addListener(() => recipes.applyFilter(_queryController.text)); // Search controller
+
     return LoadingSwitcher(
       duration: const Duration(milliseconds: Const.pageSwitchDuration),
       condition: recipes.hasLoaded,
