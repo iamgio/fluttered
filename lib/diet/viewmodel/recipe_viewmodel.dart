@@ -51,6 +51,7 @@ class RecipesViewModel extends ChangeNotifier {
   List<String> get tags => _tags;
 
   void applyFilter(String query) {
+    filter._lastQuery = query;
     if (query.isEmpty && !filter.onlyFavorites && filter.tagsIndexes.isEmpty) {
       // No filters
       _filteredRecipes = _recipes;
@@ -67,10 +68,11 @@ class RecipesViewModel extends ChangeNotifier {
 class RecipesFilter {
   final Set<int> tagsIndexes = {}; // Indexes of active tag filters
   bool onlyFavorites = false;
-  String lastQuery = ''; // Last searched query
+  String _lastQuery = ''; // Last searched query
+
+  String get lastQuery => _lastQuery;
 
   bool querySatisfied(String query, RecipeViewModel recipe) {
-    lastQuery = query;
     return query.isEmpty || recipe.name.toLowerCase().contains(query.toLowerCase()); // TODO ingredients
   }
 
