@@ -81,6 +81,7 @@ class RecipesPage extends StatelessWidget {
                 const SizedBox(width: Const.defaultPadding),
                 RecipesFilterButton(
                   child: const Icon(CupertinoIcons.heart_fill, color: Const.secondary),
+                  isActive: recipes.filter.onlyFavorites,
                   onChanged: (changed) {
                     recipes.filter.onlyFavorites = changed;
                     _applyFilter(recipes);
@@ -91,6 +92,7 @@ class RecipesPage extends StatelessWidget {
                   int i = index ~/ 2;
                   return RecipesFilterButton(
                     child: Text(recipes.tags[i]),
+                    isActive: recipes.filter.tagsIndexes.contains(i),
                     onChanged: (changed) {
                       if (changed) {
                         recipes.filter.tagsIndexes.add(i);
@@ -124,10 +126,16 @@ class RecipesPage extends StatelessWidget {
 
   void _applyFilter(RecipesViewModel recipes) => recipes.applyFilter(_queryController.text);
 
+  _initQueryController(RecipesViewModel recipes) => Future.microtask(() {
+    _queryController.text = recipes.filter.lastQuery;
+    _queryController.selection = TextSelection.fromPosition(TextPosition(offset: _queryController.text.length)); // Place cursor at the end
+    _queryController.addListener(() => recipes.applyFilter(_queryController.text)); // Search controller
+  });
+
   @override
   Widget build(BuildContext context) {
     RecipesViewModel recipes = context.watch<RecipesViewModel>();
-    _queryController.addListener(() => recipes.applyFilter(_queryController.text)); // Search controller
+    _initQueryController(recipes);
 
     return LoadingSwitcher(
       duration: const Duration(milliseconds: Const.pageSwitchDuration),

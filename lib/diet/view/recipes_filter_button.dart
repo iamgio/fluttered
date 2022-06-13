@@ -5,8 +5,9 @@ import 'package:simple_animations/simple_animations.dart';
 
 class RecipesFilterButton extends StatefulWidget {
   final Widget child;
+  final bool isActive;
   final Function(bool)? onChanged;
-  const RecipesFilterButton({Key? key, required this.child, this.onChanged}) : super(key: key);
+  const RecipesFilterButton({Key? key, required this.child, required this.isActive, this.onChanged}) : super(key: key);
 
   @override
   State<RecipesFilterButton> createState() => _RecipesFilterButtonState();
@@ -18,10 +19,12 @@ class _RecipesFilterButtonState extends State<RecipesFilterButton> with Animatio
 
   @override
   void initState() {
+    _isActive = widget.isActive;
     _color = ColorTween(begin: null, end: Const.primary).animate(CurvedAnimation(
       parent: controller,
       curve: Curves.easeInOut,
     ));
+    if(_isActive) controller.forward(from: 1); // Button starts filled if this is already active
     controller.duration = const Duration(milliseconds: Const.recipesFilterPressAnimationDuration);
     super.initState();
   }

@@ -65,10 +65,12 @@ class RecipesViewModel extends ChangeNotifier {
 }
 
 class RecipesFilter {
-  final List<int> tagsIndexes = []; // Indexes of active tag filters
+  final Set<int> tagsIndexes = {}; // Indexes of active tag filters
   bool onlyFavorites = false;
+  String lastQuery = ''; // Last searched query
 
   bool querySatisfied(String query, RecipeViewModel recipe) {
+    lastQuery = query;
     return query.isEmpty || recipe.name.toLowerCase().contains(query.toLowerCase()); // TODO ingredients
   }
 
