@@ -15,7 +15,7 @@ class RecipesPage extends StatelessWidget {
 
   RecipesPage({Key? key}) : super(key: key);
 
-  _buildContent(BuildContext context, RecipesViewModel recipes) {
+  _buildRecipes(BuildContext context, RecipesViewModel recipes) {
     return List.generate(recipes.filteredRecipes.length, (index) {
       return Padding(
         padding: const EdgeInsets.fromLTRB(Const.defaultPadding, 0, Const.defaultPadding, Const.recipesSpacing),
@@ -39,6 +39,10 @@ class RecipesPage extends StatelessWidget {
             padding: EdgeInsets.only(left: Const.recipesSearchIconPaddingLeft, right: Const.recipesSearchIconPaddingRight),
             child: Icon(CupertinoIcons.search, color: Const.primary),
           ),
+          suffixIcon: _queryController.text.isNotEmpty ? IconButton(
+            onPressed: () => _queryController.text = '',
+            icon: const Icon(CupertinoIcons.clear, color: Const.primary),
+          ) : null,
           border: _buildInputBorder(),
           enabledBorder: _buildInputBorder(),
           focusedBorder: _buildInputBorder(width: Const.recipesSearchFocusedBorderWidth),
@@ -48,22 +52,22 @@ class RecipesPage extends StatelessWidget {
 
   // A gradient masks for the scrollable filters row
   _buildFiltersScrollGradient() => Positioned.fill(
-    child: IgnorePointer(
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Const.tertiary,
-              Const.tertiary.withOpacity(0),
-              Const.tertiary.withOpacity(0),
-              Const.tertiary,
-            ],
-            stops: const [0, Const.recipesFilterScrollGradientOffset, 1 - Const.recipesFilterScrollGradientOffset, 1],
+        child: IgnorePointer(
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Const.tertiary,
+                  Const.tertiary.withOpacity(0),
+                  Const.tertiary.withOpacity(0),
+                  Const.tertiary,
+                ],
+                stops: const [0, Const.recipesFilterScrollGradientOffset, 1 - Const.recipesFilterScrollGradientOffset, 1],
+              ),
+            ),
           ),
         ),
-      ),
-    ),
-  );
+      );
 
   _buildSearchFilters(BuildContext context, RecipesViewModel recipes) => Stack(
         children: [
@@ -148,7 +152,7 @@ class RecipesPage extends StatelessWidget {
             sliver: SliverList(
               delegate: SliverChildListDelegate([
                 const SizedBox(height: 8),
-                ..._buildContent(context, recipes), // Recipe widgets are built here
+                ..._buildRecipes(context, recipes), // Recipe widgets are built here
               ]),
             ),
           ),

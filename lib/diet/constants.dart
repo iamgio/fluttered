@@ -46,7 +46,7 @@ class Const {
 
   static const double recipesSearchRadius = 18;
   static const double recipesSearchDefaultBorderWidth = 1;
-  static const double recipesSearchFocusedBorderWidth = 2;
+  static const double recipesSearchFocusedBorderWidth = 1.5;
   static const double recipesSearchIconPaddingLeft = 12;
   static const double recipesSearchIconPaddingRight = 4;
   static const double recipesFilterRadius = 32;
