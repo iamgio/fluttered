@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:fluttered/diet/constants.dart';
 import 'package:fluttered/diet/viewmodel/recipe_viewmodel.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -76,6 +75,8 @@ class _RecipeViewState extends State<RecipeView> with AnimationMixin {
               bottom: Const.recipesSpacing,
               child: FloatingActionButton(
                 backgroundColor: Const.secondary,
+                foregroundColor: Colors.white,
+                shape: const CircleBorder(),
                 child: ScaleTransition(
                   scale: _heartSize,
                   child: Icon(recipe.isFavorite ? CupertinoIcons.heart_fill : CupertinoIcons.heart),
